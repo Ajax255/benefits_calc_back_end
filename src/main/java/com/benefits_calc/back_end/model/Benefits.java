@@ -2,10 +2,14 @@ package com.benefits_calc.back_end.model;
 
 import java.util.UUID;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Benefits {
     private final UUID id;
+    
+    @NotBlank
     private final String name;
     private final String employmentStatus;
     private final float hourlyRate;

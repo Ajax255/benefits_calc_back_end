@@ -2,6 +2,7 @@ package com.benefits_calc.back_end.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.benefits_calc.back_end.model.Benefits;
@@ -28,6 +29,39 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     @Override
     public List<Benefits> selectAllBenefits() {
         return DATA_BASE;
+    }
+
+    @Override
+    public Optional<Benefits> selectBenefitsById(UUID id) {
+        return DATA_BASE.stream().filter(Benefits -> Benefits.getID().equals(id)).findFirst();
+    }
+
+    @Override
+    public int deleteBenefitsById(UUID id) {
+        Optional<Benefits> benefitsMaybe = selectBenefitsById(id);
+        if (benefitsMaybe.isEmpty()) {
+            return 0;
+        }
+        DATA_BASE.remove(benefitsMaybe.get());
+        return 1;
+    }
+
+    @Override
+    public int updateBenefitsById(UUID id, Benefits update) {
+        return selectBenefitsById(id).map(Benefits -> {
+            int indexOfBenefitsToUpdate = DATA_BASE.indexOf(Benefits);
+            if (indexOfBenefitsToUpdate >= 0) {
+                DATA_BASE.set(indexOfBenefitsToUpdate, new Benefits(id, update.getName(), update.getEmploymentStatus(),
+                        update.getHourlyRate(), update.getBaseSalary(), update.getTotalIncome(), update.getMedical(),
+                        update.getMedAmt(), update.getDental(), update.getDentAmt(), update.getVision(),
+                        update.getVisnAmt(), update.getHealthSavingsAccount(), update.getHsaAmt(),
+                        update.getRetirement(), update.getLifeInsurance(), update.getAccidental(),
+                        update.getLongTermDisb(), update.getMedicare(), update.getHolidays(), update.getWinterLeave(),
+                        update.getTotalBenefits(), update.getTotalSalaryAndBenefits(), update.getPctBenToSal()));
+                return 1;
+            }
+            return 0;
+        }).orElse(0);
     }
 
 }
