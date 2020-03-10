@@ -1,16 +1,31 @@
 package com.benefits_calc.back_end.dao;
 
+import java.io.Console;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import com.benefits_calc.back_end.model.Benefits;
+import com.fasterxml.jackson.core.json.JsonReadContext;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.stereotype.Repository;
 
 @Repository("fakeDao")
 public class FakeBenefitsDataAccessService implements BenefitsDao {
+
+    public FakeBenefitsDataAccessService() {
+        initializeBenefits();
+    }
 
     private static List<Benefits> DATA_BASE = new ArrayList<>();
 
@@ -62,6 +77,17 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
             }
             return 0;
         }).orElse(0);
+    }
+
+    private void initializeBenefits() {
+        System.out.println("TRIED");
+        // File jsonInputFile = new File("C:/Users/antho/Web_Dev/benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json");
+        // try {
+            
+           
+        // } catch (Exception e) {
+        //     System.out.println(e);
+        // }
     }
 
 }
