@@ -46,7 +46,7 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     @Override
     public int deleteBenefitsByName(String name) {
         Optional<Benefits> benefitsMaybe = selectBenefitsByName(name);
-        if (benefitsMaybe.isEmpty()) {
+        if (!benefitsMaybe.isPresent()) {
             return 0;
         }
         DATA_BASE.remove(benefitsMaybe.get());
@@ -74,8 +74,10 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     private void initializeBenefits() {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            // Change path on different machines
             InputStream inputStream = new FileInputStream(new File(
-                    "../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json"));
+                    "C:" + "\\Users\\danar\\Desktop\\ManagingSoftwareProcess\\teamProject\\benefitsCalc\\" +
+                    "benefits_calc_back_end\\src\\main\\java\\com\\benefits_calc\\back_end\\data\\allBenefitsList.json"));
             TypeReference<List<Benefits>> typeReference = new TypeReference<List<Benefits>>() {
             };
             DATA_BASE = mapper.readValue(inputStream, typeReference);
