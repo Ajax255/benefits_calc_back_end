@@ -23,7 +23,7 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
 
     @Override
     public int insertBenefits(Benefits benefits) {
-        DATA_BASE.add(new Benefits( benefits.getUserName(), benefits.getEmploymentStatus(), benefits.getHourlyRate(),
+        DATA_BASE.add(new Benefits(benefits.getName(), benefits.getEmploymentStatus(), benefits.getHourlyRate(),
                 benefits.getBaseSalary(), benefits.getTotalIncome(), benefits.getMedical(), benefits.getMedAmt(),
                 benefits.getDental(), benefits.getDentAmt(), benefits.getVision(), benefits.getVisnAmt(),
                 benefits.getHealthSavingsAccount(), benefits.getHsaAmt(), benefits.getRetirement(),
@@ -39,13 +39,13 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     }
 
     @Override
-    public Optional<Benefits> selectBenefitsByUserName(String userName) {
-        return DATA_BASE.stream().filter(Benefits -> Benefits.getUserName().equals(userName)).findFirst();
+    public Optional<Benefits> selectBenefitsByName(String name) {
+        return DATA_BASE.stream().filter(Benefits -> Benefits.getName().equals(name)).findFirst();
     }
 
     @Override
-    public int deleteBenefitsByUserName(String userName) {
-        Optional<Benefits> benefitsMaybe = selectBenefitsByUserName(userName);
+    public int deleteBenefitsByName(String name) {
+        Optional<Benefits> benefitsMaybe = selectBenefitsByName(name);
         if (benefitsMaybe.isEmpty()) {
             return 0;
         }
@@ -54,11 +54,11 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     }
 
     @Override
-    public int updateBenefitsByUserName(String userName, Benefits update) {
-        return selectBenefitsByUserName(userName).map(Benefits -> {
+    public int updateBenefitsByName(String name, Benefits update) {
+        return selectBenefitsByName(name).map(Benefits -> {
             int indexOfBenefitsToUpdate = DATA_BASE.indexOf(Benefits);
             if (indexOfBenefitsToUpdate >= 0) {
-                DATA_BASE.set(indexOfBenefitsToUpdate, new Benefits(update.getUserName(), update.getEmploymentStatus(),
+                DATA_BASE.set(indexOfBenefitsToUpdate, new Benefits(update.getName(), update.getEmploymentStatus(),
                         update.getHourlyRate(), update.getBaseSalary(), update.getTotalIncome(), update.getMedical(),
                         update.getMedAmt(), update.getDental(), update.getDentAmt(), update.getVision(),
                         update.getVisnAmt(), update.getHealthSavingsAccount(), update.getHsaAmt(),
@@ -74,12 +74,14 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     private void initializeBenefits() {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            InputStream inputStream = new FileInputStream(new File("../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json"));
-            TypeReference<List<Benefits>> typeReference = new TypeReference<List<Benefits>>() {};
+            InputStream inputStream = new FileInputStream(new File(
+                    "../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json"));
+            TypeReference<List<Benefits>> typeReference = new TypeReference<List<Benefits>>() {
+            };
             DATA_BASE = mapper.readValue(inputStream, typeReference);
 
-            for(Benefits b : DATA_BASE){
-                System.out.println(b.getUserName());
+            for (Benefits b : DATA_BASE) {
+                System.out.print(b.getName() + ", ");
             }
         } catch (Exception e) {
             System.out.println(e);
