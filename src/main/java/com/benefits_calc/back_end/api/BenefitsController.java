@@ -42,7 +42,7 @@ public class BenefitsController {
     }
 
     @GetMapping(path = "{name}")
-    public Benefits gBenefitsByName(@PathVariable("name") String name) {
+    public Benefits getBenefitsByName(@PathVariable("name") String name) {
         return benefitsService.getBenefitsByName(name).orElse(null);
     }
 

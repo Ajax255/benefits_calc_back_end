@@ -12,10 +12,10 @@ import com.benefits_calc.back_end.model.Benefits;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Repository("fakeDao")
-public class FakeBenefitsDataAccessService implements BenefitsDao {
+@Repository("BenefitsDao")
+public class BenefitsDataAccessService implements BenefitsDao {
 
-    public FakeBenefitsDataAccessService() {
+    public BenefitsDataAccessService() {
         initializeBenefits();
     }
 

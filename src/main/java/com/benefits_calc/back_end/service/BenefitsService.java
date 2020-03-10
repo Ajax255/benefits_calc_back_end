@@ -16,7 +16,7 @@ public class BenefitsService {
     private final BenefitsDao benefitsDao;
 
     @Autowired
-    public BenefitsService(@Qualifier("fakeDao") BenefitsDao benefitsDao) {
+    public BenefitsService(@Qualifier("BenefitsDao") BenefitsDao benefitsDao) {
         this.benefitsDao = benefitsDao;
     }
 
