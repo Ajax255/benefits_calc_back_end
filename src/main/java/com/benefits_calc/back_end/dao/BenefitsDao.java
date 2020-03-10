@@ -2,24 +2,18 @@ package com.benefits_calc.back_end.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.benefits_calc.back_end.model.Benefits;
 
 public interface BenefitsDao {
 
-    int insertBenefits(UUID id, Benefits benefits);
-
-    default int insertBenefits(Benefits benefits) {
-        UUID id = UUID.randomUUID();
-        return insertBenefits(id, benefits);
-    }
+    int insertBenefits(Benefits benefits);
 
     List<Benefits> selectAllBenefits();
 
-    Optional<Benefits> selectBenefitsById(UUID id);
+    Optional<Benefits> selectBenefitsByUserName(String userName);
 
-    int deleteBenefitsById(UUID id);
+    int deleteBenefitsByUserName(String userName);
 
-    int updateBenefitsById(UUID id, Benefits benefits);
+    int updateBenefitsByUserName(String userName, Benefits benefits);
 }

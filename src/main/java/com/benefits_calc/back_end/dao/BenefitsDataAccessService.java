@@ -2,7 +2,6 @@ package com.benefits_calc.back_end.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.benefits_calc.back_end.model.Benefits;
 
@@ -12,18 +11,18 @@ import org.springframework.stereotype.Repository;
 public class BenefitsDataAccessService implements BenefitsDao {
 
     @Override
-    public int deleteBenefitsById(UUID id) {
+    public int deleteBenefitsByUserName(String userName) {
         return 0;
     }
 
     @Override
-    public int insertBenefits(UUID id, Benefits benefits) {
+    public int insertBenefits(Benefits benefits) {
         return 0;
     }
 
     @Override
     public List<Benefits> selectAllBenefits() {
-        return List.of(new Benefits(UUID.randomUUID(), "FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE", 0,
+        return List.of(new Benefits("FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE", 0,
                 "FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE",
                 "FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE", "FROM POSTGRES DATA_BASE",
                 "FROM POSTGRES DATA_BASE", 0, "FROM POSTGRES DATA_BASE", 0, "FROM POSTGRES DATA_BASE", 0, 0, 0,
@@ -32,12 +31,12 @@ public class BenefitsDataAccessService implements BenefitsDao {
     }
 
     @Override
-    public Optional<Benefits> selectBenefitsById(UUID id) {
+    public Optional<Benefits> selectBenefitsByUserName(String userName) {
         return Optional.empty();
     }
 
     @Override
-    public int updateBenefitsById(UUID id, Benefits benefits) {
+    public int updateBenefitsByUserName(String userName, Benefits benefits) {
         return 0;
     }
 

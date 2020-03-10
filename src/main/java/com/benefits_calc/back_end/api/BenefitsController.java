@@ -1,7 +1,6 @@
 package com.benefits_calc.back_end.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -42,18 +41,18 @@ public class BenefitsController {
         return benefitsService.getAllBenefits();
     }
 
-    @GetMapping(path = "{id}")
-    public Benefits gBenefitsByid(@PathVariable("id") UUID id) {
-        return benefitsService.getBenefitsById(id).orElse(null);
+    @GetMapping(path = "{name}")
+    public Benefits gBenefitsByid(@PathVariable("name") String userName) {
+        return benefitsService.getBenefitsByUserName(userName).orElse(null);
     }
 
-    @DeleteMapping(path = "{id}")
-    public void deleteBenefitsById(@PathVariable("id") UUID id) {
-        benefitsService.deleteBenefits(id);
+    @DeleteMapping(path = "{name}")
+    public void deleteBenefitsById(@PathVariable("name") String userName) {
+        benefitsService.deleteBenefits(userName);
     }
 
-    @PutMapping(path = "{id}")
-    public void updateBenefits(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Benefits benefitsToUpdate) {
-        benefitsService.updateBenefits(id, benefitsToUpdate);
+    @PutMapping(path = "{name}")
+    public void updateBenefits(@PathVariable("name") String userName, @Valid @NonNull @RequestBody Benefits benefitsToUpdate) {
+        benefitsService.updateBenefits(userName, benefitsToUpdate);
     }
 }
