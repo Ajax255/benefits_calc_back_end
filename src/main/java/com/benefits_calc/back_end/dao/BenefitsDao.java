@@ -11,9 +11,9 @@ public interface BenefitsDao {
 
     List<Benefits> selectAllBenefits();
 
-    Optional<Benefits> selectBenefitsByUserName(String userName);
+    Optional<Benefits> selectBenefitsByName(String name);
 
-    int deleteBenefitsByUserName(String userName);
+    int deleteBenefitsByName(String name);
 
-    int updateBenefitsByUserName(String userName, Benefits benefits);
+    int updateBenefitsByName(String name, Benefits benefits);
 }
