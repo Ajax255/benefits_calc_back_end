@@ -2,7 +2,6 @@ package com.benefits_calc.back_end.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.benefits_calc.back_end.dao.BenefitsDao;
 import com.benefits_calc.back_end.model.Benefits;
@@ -29,15 +28,15 @@ public class BenefitsService {
         return benefitsDao.selectAllBenefits();
     }
 
-    public Optional<Benefits> getBenefitsById(UUID id) {
-        return benefitsDao.selectBenefitsById(id);
+    public Optional<Benefits> getBenefitsByUserName(String userName) {
+        return benefitsDao.selectBenefitsByUserName(userName);
     }
 
-    public int deleteBenefits(UUID id) {
-        return benefitsDao.deleteBenefitsById(id);
+    public int deleteBenefits(String userName) {
+        return benefitsDao.deleteBenefitsByUserName(userName);
     }
 
-    public int updateBenefits(UUID id, Benefits newBenefits) {
-        return benefitsDao.updateBenefitsById(id, newBenefits);
+    public int updateBenefits(String userName, Benefits newBenefits) {
+        return benefitsDao.updateBenefitsByUserName(userName, newBenefits);
     }
 }

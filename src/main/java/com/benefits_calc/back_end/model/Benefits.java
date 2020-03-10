@@ -1,16 +1,11 @@
 package com.benefits_calc.back_end.model;
 
-import java.util.UUID;
-
 import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Benefits {
-    private final UUID id;
-    
+public class Benefits {    
     @NotBlank
-    private final String name;
+    private final String userName;
     private final String employmentStatus;
     private final float hourlyRate;
     private final String baseSalary;
@@ -20,9 +15,9 @@ public class Benefits {
     private final String dental;
     private final String dentAmt;
     private final String vision;
-    private final int visnAmt;
+    private final float visnAmt;
     private final String healthSavingsAccount;
-    private final int hsaAmt;
+    private final float hsaAmt;
     private final String retirement;
     private final float lifeInsurance;
     private final float accidental;
@@ -34,21 +29,20 @@ public class Benefits {
     private final String totalSalaryAndBenefits;
     private final String pctBenToSal;
 
-    public Benefits(@JsonProperty("id") UUID id, @JsonProperty("Name") String name,
+    public Benefits(@JsonProperty("Name") String userName,
             @JsonProperty("Class") String employmentStatus, @JsonProperty("Hourly Rate") float hourlyRate,
             @JsonProperty("Base Salary") String baseSalary, @JsonProperty("Total Income") String totalIncome,
             @JsonProperty("Medical") String medical, @JsonProperty("MedAmt") String medAmt,
             @JsonProperty("Dental") String dental, @JsonProperty("DentAmt") String dentAmt,
-            @JsonProperty("Vision") String vision, @JsonProperty("VisnAmt") int visnAmt,
-            @JsonProperty("Health Savings Account") String healthSavingsAccount, @JsonProperty("HSA Amt") int hsaAmt,
+            @JsonProperty("Vision") String vision, @JsonProperty("VisnAmt") float visnAmt,
+            @JsonProperty("Health Savings Account") String healthSavingsAccount, @JsonProperty("HSA Amt") float hsaAmt,
             @JsonProperty("Retirement") String retirement, @JsonProperty("Life Insurance") float lifeInsurance,
             @JsonProperty("Accidental") float accidental, @JsonProperty("Long Term Disb") float longTermDisb,
             @JsonProperty("Medicare") String medicare, @JsonProperty("Holidays") String holidays,
             @JsonProperty("Winter Leave") float winterLeave, @JsonProperty("Total Benefits") String totalBenefits,
             @JsonProperty("Total Salary and Benefits") String totalSalaryAndBenefits,
             @JsonProperty("Pct Ben to Sal") String pctBenToSal) {
-        this.id = id;
-        this.name = name;
+        this.userName = userName;
         this.employmentStatus = employmentStatus;
         this.hourlyRate = hourlyRate;
         this.baseSalary = baseSalary;
@@ -73,12 +67,8 @@ public class Benefits {
         this.pctBenToSal = pctBenToSal;
     }
 
-    public UUID getID() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     public String getEmploymentStatus() {
@@ -117,7 +107,7 @@ public class Benefits {
         return vision;
     }
 
-    public int getVisnAmt() {
+    public float getVisnAmt() {
         return visnAmt;
     }
 
@@ -125,7 +115,7 @@ public class Benefits {
         return healthSavingsAccount;
     }
 
-    public int getHsaAmt() {
+    public float getHsaAmt() {
         return hsaAmt;
     }
 

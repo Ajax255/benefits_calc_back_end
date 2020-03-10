@@ -1,24 +1,16 @@
 package com.benefits_calc.back_end.dao;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-import com.benefits_calc.back_end.model.Benefits;
-import com.fasterxml.jackson.core.json.JsonReadContext;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.apache.tomcat.util.json.JSONParser;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.stereotype.Repository;
+import com.benefits_calc.back_end.model.Benefits;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository("fakeDao")
 public class FakeBenefitsDataAccessService implements BenefitsDao {
@@ -30,8 +22,8 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     private static List<Benefits> DATA_BASE = new ArrayList<>();
 
     @Override
-    public int insertBenefits(UUID id, Benefits benefits) {
-        DATA_BASE.add(new Benefits(id, benefits.getName(), benefits.getEmploymentStatus(), benefits.getHourlyRate(),
+    public int insertBenefits(Benefits benefits) {
+        DATA_BASE.add(new Benefits( benefits.getUserName(), benefits.getEmploymentStatus(), benefits.getHourlyRate(),
                 benefits.getBaseSalary(), benefits.getTotalIncome(), benefits.getMedical(), benefits.getMedAmt(),
                 benefits.getDental(), benefits.getDentAmt(), benefits.getVision(), benefits.getVisnAmt(),
                 benefits.getHealthSavingsAccount(), benefits.getHsaAmt(), benefits.getRetirement(),
@@ -47,13 +39,13 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     }
 
     @Override
-    public Optional<Benefits> selectBenefitsById(UUID id) {
-        return DATA_BASE.stream().filter(Benefits -> Benefits.getID().equals(id)).findFirst();
+    public Optional<Benefits> selectBenefitsByUserName(String userName) {
+        return DATA_BASE.stream().filter(Benefits -> Benefits.getUserName().equals(userName)).findFirst();
     }
 
     @Override
-    public int deleteBenefitsById(UUID id) {
-        Optional<Benefits> benefitsMaybe = selectBenefitsById(id);
+    public int deleteBenefitsByUserName(String userName) {
+        Optional<Benefits> benefitsMaybe = selectBenefitsByUserName(userName);
         if (benefitsMaybe.isEmpty()) {
             return 0;
         }
@@ -62,11 +54,11 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     }
 
     @Override
-    public int updateBenefitsById(UUID id, Benefits update) {
-        return selectBenefitsById(id).map(Benefits -> {
+    public int updateBenefitsByUserName(String userName, Benefits update) {
+        return selectBenefitsByUserName(userName).map(Benefits -> {
             int indexOfBenefitsToUpdate = DATA_BASE.indexOf(Benefits);
             if (indexOfBenefitsToUpdate >= 0) {
-                DATA_BASE.set(indexOfBenefitsToUpdate, new Benefits(id, update.getName(), update.getEmploymentStatus(),
+                DATA_BASE.set(indexOfBenefitsToUpdate, new Benefits(update.getUserName(), update.getEmploymentStatus(),
                         update.getHourlyRate(), update.getBaseSalary(), update.getTotalIncome(), update.getMedical(),
                         update.getMedAmt(), update.getDental(), update.getDentAmt(), update.getVision(),
                         update.getVisnAmt(), update.getHealthSavingsAccount(), update.getHsaAmt(),
@@ -80,14 +72,17 @@ public class FakeBenefitsDataAccessService implements BenefitsDao {
     }
 
     private void initializeBenefits() {
-        System.out.println("TRIED");
-        // File jsonInputFile = new File("C:/Users/antho/Web_Dev/benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json");
-        // try {
-            
-           
-        // } catch (Exception e) {
-        //     System.out.println(e);
-        // }
-    }
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            InputStream inputStream = new FileInputStream(new File("../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json"));
+            TypeReference<List<Benefits>> typeReference = new TypeReference<List<Benefits>>() {};
+            DATA_BASE = mapper.readValue(inputStream, typeReference);
 
+            for(Benefits b : DATA_BASE){
+                System.out.println(b.getUserName());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
