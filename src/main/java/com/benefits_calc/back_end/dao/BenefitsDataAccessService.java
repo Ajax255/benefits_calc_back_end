@@ -76,8 +76,7 @@ public class BenefitsDataAccessService implements BenefitsDao {
             ObjectMapper mapper = new ObjectMapper();
             // Change path on different machines
             InputStream inputStream = new FileInputStream(new File(
-                    "C:" + "\\Users\\danar\\Desktop\\ManagingSoftwareProcess\\teamProject\\benefitsCalc\\" +
-                    "benefits_calc_back_end\\src\\main\\java\\com\\benefits_calc\\back_end\\data\\allBenefitsList.json"));
+                    "../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allBenefitsList.json"));
             TypeReference<List<Benefits>> typeReference = new TypeReference<List<Benefits>>() {
             };
             DATA_BASE = mapper.readValue(inputStream, typeReference);
