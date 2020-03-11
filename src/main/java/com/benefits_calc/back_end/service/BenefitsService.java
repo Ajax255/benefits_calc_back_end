@@ -16,7 +16,7 @@ public class BenefitsService {
     private final BenefitsDao benefitsDao;
 
     @Autowired
-    public BenefitsService(@Qualifier("fakeDao") BenefitsDao benefitsDao) {
+    public BenefitsService(@Qualifier("BenefitsDao") BenefitsDao benefitsDao) {
         this.benefitsDao = benefitsDao;
     }
 
@@ -28,15 +28,15 @@ public class BenefitsService {
         return benefitsDao.selectAllBenefits();
     }
 
-    public Optional<Benefits> getBenefitsByUserName(String userName) {
-        return benefitsDao.selectBenefitsByUserName(userName);
+    public Optional<Benefits> getBenefitsByName(String name) {
+        return benefitsDao.selectBenefitsByName(name);
     }
 
-    public int deleteBenefits(String userName) {
-        return benefitsDao.deleteBenefitsByUserName(userName);
+    public int deleteBenefits(String name) {
+        return benefitsDao.deleteBenefitsByName(name);
     }
 
-    public int updateBenefits(String userName, Benefits newBenefits) {
-        return benefitsDao.updateBenefitsByUserName(userName, newBenefits);
+    public int updateBenefits(String name, Benefits newBenefits) {
+        return benefitsDao.updateBenefitsByName(name, newBenefits);
     }
 }
