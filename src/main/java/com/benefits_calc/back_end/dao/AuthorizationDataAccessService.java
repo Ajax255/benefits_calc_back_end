@@ -34,14 +34,14 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
     }
 
     @Override
-    public Optional<Authorization> selectAuthorizationByName(String userName, String password) {
-        return AUTHORIZED_DATA_BASE.stream().filter(Authorization -> Authorization.getUserName().equals(userName))
-                .findFirst();
+    public Optional<Authorization> selectAuthorizationByUserName(String userName, String password) {
+        return AUTHORIZED_DATA_BASE.stream().filter(Authorization -> Authorization.getUserName().equals(userName)
+                && Authorization.getPassword().equals(password)).findFirst();
     }
 
     @Override
-    public int deleteAuthorizationByName(String userName, String password) {
-        Optional<Authorization> authorizationMaybe = selectAuthorizationByName(userName, password);
+    public int deleteAuthorizationByUserName(String userName, String password) {
+        Optional<Authorization> authorizationMaybe = selectAuthorizationByUserName(userName, password);
         if (authorizationMaybe.isEmpty()) {
             return 0;
         }
@@ -50,8 +50,8 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
     }
 
     @Override
-    public int updateAuthorizationByName(String userName, String password, Authorization update) {
-        return selectAuthorizationByName(userName, password).map(authorization -> {
+    public int updateAuthorizationByUserName(String userName, String password, Authorization update) {
+        return selectAuthorizationByUserName(userName, password).map(authorization -> {
             int indexOfAuthorizationToUpdate = AUTHORIZED_DATA_BASE.indexOf(authorization);
             if (indexOfAuthorizationToUpdate >= 0) {
                 AUTHORIZED_DATA_BASE.set(indexOfAuthorizationToUpdate,
@@ -66,13 +66,13 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
         try {
             ObjectMapper mapper = new ObjectMapper();
             InputStream inputStream = new FileInputStream(new File(
-                    "../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allAthorizedList.json"));
+                    "../benefits_calc_back_end/src/main/java/com/benefits_calc/back_end/data/allAuthorizedList.json"));
             TypeReference<List<Authorization>> typeReference = new TypeReference<List<Authorization>>() {
             };
             AUTHORIZED_DATA_BASE = mapper.readValue(inputStream, typeReference);
 
             for (Authorization b : AUTHORIZED_DATA_BASE) {
-                System.out.print(b.getName() + ", ");
+                System.out.print(b.getUserName() + ", ");
             }
         } catch (Exception e) {
             System.out.println(e);

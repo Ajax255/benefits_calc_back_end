@@ -11,9 +11,9 @@ public interface AuthorizationDao {
 
     List<Authorization> selectAllAuthorizations();
 
-    Optional<Authorization> selectAuthorizationByName(String userName, String password);
+    Optional<Authorization> selectAuthorizationByUserName(String userName, String password);
 
-    int deleteAuthorizationByName(String userName, String password);
+    int deleteAuthorizationByUserName(String userName, String password);
 
-    int updateAuthorizationByName(String userName, String password, Authorization authorization);
+    int updateAuthorizationByUserName(String userName, String password, Authorization authorization);
 }
