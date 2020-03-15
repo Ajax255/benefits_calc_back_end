@@ -42,7 +42,7 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
     @Override
     public int deleteAuthorizationByUserName(String userName, String password) {
         Optional<Authorization> authorizationMaybe = selectAuthorizationByUserName(userName, password);
-        if (authorizationMaybe.isEmpty()) {
+        if (!authorizationMaybe.isPresent()) {
             return 0;
         }
         AUTHORIZED_DATA_BASE.remove(authorizationMaybe.get());
