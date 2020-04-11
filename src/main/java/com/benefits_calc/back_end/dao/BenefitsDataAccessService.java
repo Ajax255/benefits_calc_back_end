@@ -82,7 +82,7 @@ public class BenefitsDataAccessService implements BenefitsDao {
             DATA_BASE = mapper.readValue(inputStream, typeReference);
 
             for (Benefits b : DATA_BASE) {
-                System.out.print(b.getID() + ", ");
+                // System.out.print(b.getID() + ", ");
             }
         } catch (Exception e) {
             System.out.println(e);

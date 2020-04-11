@@ -72,7 +72,7 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
             AUTHORIZED_DATA_BASE = mapper.readValue(inputStream, typeReference);
 
             for (Authorization b : AUTHORIZED_DATA_BASE) {
-                System.out.print(b.getUserName() + ", ");
+                // System.out.print(b.getUserName() + ", ");
             }
         } catch (Exception e) {
             System.out.println(e);
