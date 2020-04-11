@@ -7,7 +7,7 @@ This application provides a means for the front end to retrieve user benefits. T
 ## Project setup
 
 ```
-Follow instructions from this https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-install website to deploy to your local environment.
+Follow instructions from this [Configuration Reference](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-install.com) website to deploy to your local environment.
 ```
 
 ## Future Features
