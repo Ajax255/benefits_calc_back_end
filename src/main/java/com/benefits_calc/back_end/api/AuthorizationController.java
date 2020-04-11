@@ -44,7 +44,7 @@ public class AuthorizationController {
     @GetMapping(path = "{user name}/{password}")
     public String getAuthorizationByUserName(@PathVariable("user name") String userName,
             @PathVariable("password") String password) {
-        return authorizationService.getAuthorizationByName(userName, password).orElse(null).getName();
+        return authorizationService.getAuthorizationByName(userName, password).orElse(null).getID();
     }
 
     @DeleteMapping(path = "{user name}/{password}")
