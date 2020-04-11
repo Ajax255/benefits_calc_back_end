@@ -8,13 +8,13 @@ public class Authorization {
     @NotBlank
     private final String userName;
     private final String password;
-    private final String name;
+    private final String id;
 
     public Authorization(@JsonProperty("User Name") String userName, @JsonProperty("Password") String password,
-            @JsonProperty("Name") String name) {
+            @JsonProperty("ID") String id) {
         this.userName = userName;
         this.password = password;
-        this.name = name;
+        this.id = id;
     }
 
     public String getUserName() {
@@ -25,8 +25,8 @@ public class Authorization {
         return password;
     }
 
-    public String getName() {
-        return name;
+    public String getID() {
+        return id;
     }
 
 }

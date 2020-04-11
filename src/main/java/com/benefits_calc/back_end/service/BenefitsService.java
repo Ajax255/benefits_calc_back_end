@@ -28,15 +28,15 @@ public class BenefitsService {
         return benefitsDao.selectAllBenefits();
     }
 
-    public Optional<Benefits> getBenefitsByName(String name) {
-        return benefitsDao.selectBenefitsByName(name);
+    public Optional<Benefits> getBenefitsByID(String id) {
+        return benefitsDao.selectBenefitsByID(id);
     }
 
-    public int deleteBenefits(String name) {
-        return benefitsDao.deleteBenefitsByName(name);
+    public int deleteBenefits(String id) {
+        return benefitsDao.deleteBenefitsByID(id);
     }
 
-    public int updateBenefits(String name, Benefits newBenefits) {
-        return benefitsDao.updateBenefitsByName(name, newBenefits);
+    public int updateBenefits(String id, Benefits newBenefits) {
+        return benefitsDao.updateBenefitsByID(id, newBenefits);
     }
 }
