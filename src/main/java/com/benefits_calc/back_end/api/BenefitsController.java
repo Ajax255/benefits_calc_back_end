@@ -41,19 +41,18 @@ public class BenefitsController {
         return benefitsService.getAllBenefits();
     }
 
-    @GetMapping(path = "{name}")
-    public Benefits getBenefitsByName(@PathVariable("name") String name) {
-        return benefitsService.getBenefitsByName(name).orElse(null);
+    @GetMapping(path = "{id}")
+    public Benefits getBenefitsByID(@PathVariable("id") String id) {
+        return benefitsService.getBenefitsByID(id).orElse(null);
     }
 
-    @DeleteMapping(path = "{name}")
-    public void deleteBenefitsByName(@PathVariable("name") String name) {
-        benefitsService.deleteBenefits(name);
+    @DeleteMapping(path = "{id}")
+    public void deleteBenefitsByID(@PathVariable("id") String id) {
+        benefitsService.deleteBenefits(id);
     }
 
-    @PutMapping(path = "{name}")
-    public void updateBenefits(@PathVariable("name") String name,
-            @Valid @NonNull @RequestBody Benefits benefitsToUpdate) {
-        benefitsService.updateBenefits(name, benefitsToUpdate);
+    @PutMapping(path = "{id}")
+    public void updateBenefits(@PathVariable("id") String id, @Valid @NonNull @RequestBody Benefits benefitsToUpdate) {
+        benefitsService.updateBenefits(id, benefitsToUpdate);
     }
 }

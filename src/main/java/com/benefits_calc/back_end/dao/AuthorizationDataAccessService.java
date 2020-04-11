@@ -24,7 +24,7 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
     @Override
     public int insertAuthorization(Authorization authorization) {
         AUTHORIZED_DATA_BASE.add(
-                new Authorization(authorization.getUserName(), authorization.getPassword(), authorization.getName()));
+                new Authorization(authorization.getUserName(), authorization.getPassword(), authorization.getID()));
         return 1;
     }
 
@@ -55,7 +55,7 @@ public class AuthorizationDataAccessService implements AuthorizationDao {
             int indexOfAuthorizationToUpdate = AUTHORIZED_DATA_BASE.indexOf(authorization);
             if (indexOfAuthorizationToUpdate >= 0) {
                 AUTHORIZED_DATA_BASE.set(indexOfAuthorizationToUpdate,
-                        new Authorization(update.getUserName(), update.getPassword(), update.getName()));
+                        new Authorization(update.getUserName(), update.getPassword(), update.getID()));
                 return 1;
             }
             return 0;
